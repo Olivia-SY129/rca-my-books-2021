@@ -1,4 +1,5 @@
 import axios from "axios";
+import { deleteBook } from "../redux/modules/books";
 import { BookReqType, BookType } from "../types";
 
 const BOOK_API_URL = "https://api.marktube.tv/v1/book";
@@ -23,5 +24,13 @@ export default class BookService {
       },
     });
     return response.data;
+  }
+
+  public static async deleteBook(token: string, bookId: number) {
+    await axios.delete(`${BOOK_API_URL}/${bookId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 }
